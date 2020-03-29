@@ -15,9 +15,13 @@ public class Server {
 
     private static final int PORT = 9999;
 
-    private static ExecutorService pool = Executors.newFixedThreadPool(4);
+    private static ExecutorService pool = Executors.newCachedThreadPool();
 
     private static OutputData outputData = new OutputData();
+
+    private static int START_PRICE = 1000;
+    private static int START_SUCCESS_BIDS = 0;
+    private static int START_SUCCESS_DEALERS = 0;
 
     /**
      * @param args the command line arguments
@@ -25,9 +29,10 @@ public class Server {
     public static void main(String[] args) throws IOException {
 
         ServerSocket listener = new ServerSocket(PORT);
-        outputData.setFinalPrice(1000);
-        outputData.setNumSuccessPids(0);
-        outputData.setNumSuccessDealers(0);
+        outputData.setFinalPrice(START_PRICE);
+        outputData.setNumSuccessBids(START_SUCCESS_BIDS);
+        outputData.setNumSuccessDealers(START_SUCCESS_DEALERS);
+
         try {
             while (true) {
                 Socket clientSocket = listener.accept();
@@ -48,7 +53,7 @@ public class Server {
 
     public static void showOutputData() {
         System.out.println("Final Price = " + outputData.getFinalPrice());
-        System.out.println("count of accepted bids = " + outputData.getNumSuccessPids());
+        System.out.println("count of accepted bids = " + outputData.getNumSuccessBids());
         System.out.println("Count of dealers = " + outputData.getNumSuccessDealers());
     }
 }

@@ -7,7 +7,7 @@ public class OutputData {
 
     private int finalPrice;
 
-    private int numSuccessPids;
+    private int numSuccessBids;
 
     private int numSuccessDealers;
 
@@ -19,12 +19,12 @@ public class OutputData {
         this.finalPrice = price;
     }
 
-    public int getNumSuccessPids() {
-        return numSuccessPids;
+    public int getNumSuccessBids() {
+        return numSuccessBids;
     }
 
-    public void setNumSuccessPids(int numPids) {
-        this.numSuccessPids = numPids;
+    public void setNumSuccessBids(int numBids) {
+        this.numSuccessBids = numBids;
     }
 
     public int getNumSuccessDealers() {

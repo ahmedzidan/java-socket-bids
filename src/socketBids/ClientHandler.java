@@ -14,6 +14,8 @@ public class ClientHandler implements Runnable {
     private Scanner input;
     private static OutputData outputData = new OutputData();
 
+    private static int ALLOWED_BIDS_NUMBER = 20;
+
     public ClientHandler(
             Socket clientSocket,
             PrintWriter outPrintWriter,
@@ -29,23 +31,23 @@ public class ClientHandler implements Runnable {
 
     @Override
     public void run() {
-        int numPid = 0;
-        boolean isDealerSuccessPids = false;
+        int numBid = 0;
+        boolean isDealerSuccessBids = false;
         try {
             do {
                 int finalPrice = outputData.getFinalPrice();
                 int price = input.nextInt();
                 if (finalPrice < price) {
                     updateOutputData(price);
-                    isDealerSuccessPids = true;
+                    isDealerSuccessBids = true;
                 }
                 output.println(finalPrice);
-                numPid++;
-            } while (numPid < 20);
+                numBid++;
+            } while (numBid < ALLOWED_BIDS_NUMBER);
         } catch (Exception e) {
             System.err.println(e.getStackTrace());
         } finally {
-            if (isDealerSuccessPids) {
+            if (isDealerSuccessBids) {
                 outputData.setNumSuccessDealers(outputData.getNumSuccessDealers() + 1);
             }
             output.close();
@@ -56,6 +58,6 @@ public class ClientHandler implements Runnable {
 
     public void updateOutputData(int price) {
         outputData.setFinalPrice(price);
-        outputData.setNumSuccessPids(outputData.getNumSuccessPids() + 1);
+        outputData.setNumSuccessBids(outputData.getNumSuccessBids() + 1);
     }
 }
