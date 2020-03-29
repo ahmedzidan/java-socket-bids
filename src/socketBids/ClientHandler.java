@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package socketBids;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
@@ -25,7 +19,7 @@ public class ClientHandler implements Runnable {
             PrintWriter outPrintWriter,
             Scanner inputScanner,
             OutputData outputData
-    ) throws IOException {
+    ) {
         this.client = clientSocket;
         this.output = outPrintWriter;
         this.input = inputScanner;
@@ -36,7 +30,6 @@ public class ClientHandler implements Runnable {
     @Override
     public void run() {
         int numPid = 0;
-        int numberOfDealers = 0;
         boolean isDealerSuccessPids = false;
         try {
             do {
